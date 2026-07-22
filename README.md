@@ -47,15 +47,6 @@ The key is stored only in your browser's local storage — nothing is sent anywh
 
 > ⚠️ Note: Since this is a pure front-end app, the API key is visible in the browser (like any client-only project). That's fine for a personal/portfolio project with the free tier, but don't reuse a key tied to a paid plan here.
 
-## 🚀 How to run
-
-Just open `index.html` in a browser — no install, no server needed.
-
-To deploy it live:
-1. Push the folder to a GitHub repo
-2. Go to **Settings → Pages → deploy from `main` branch**
-3. You'll get a free live link like `chandqasim64.github.io/weather-dashboard`
-
 ## 🎨 Customize
 
 - Sky colors per weather type are CSS variables in `style.css` (search for `--sky-a`, `--sky-b`, `--accent` under each `body[data-weather="..."]` block)
