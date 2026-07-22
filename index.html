@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skyline — Weather Dashboard</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body data-weather="clear" data-theme="auto">
+
+  <canvas id="skyCanvas"></canvas>
+
+  <div class="app">
+
+    <!-- HEADER -->
+    <header class="topbar">
+      <div class="brand">Skyline<span class="dot">.</span></div>
+
+      <form class="search-form" id="searchForm">
+        <input type="text" id="cityInput" placeholder="Search a city…" autocomplete="off" />
+        <button type="submit" aria-label="Search">↵</button>
+      </form>
+
+      <div class="topbar-actions">
+        <button class="icon-btn" id="locBtn" title="Use my location">📍</button>
+        <button class="icon-btn" id="unitBtn" title="Toggle °C/°F">°C</button>
+        <button class="icon-btn" id="themeBtn" title="Toggle theme">🌓</button>
+        <button class="icon-btn" id="shareBtn" title="Share current weather">🔗</button>
+      </div>
+    </header>
+
+    <!-- API KEY NOTICE (shown until key is set) -->
+    <div class="key-banner" id="keyBanner">
+      <p>Add your free OpenWeatherMap API key to activate live data.</p>
+      <input type="text" id="apiKeyInput" placeholder="Paste your API key here" />
+      <button id="saveKeyBtn">Save key</button>
+    </div>
+
+    <!-- OFFLINE / ERROR BANNER -->
+    <div class="status-banner" id="statusBanner" hidden></div>
+
+    <main class="dashboard" id="dashboard" hidden>
+
+      <!-- LEFT: current + hourly + daily -->
+      <section class="main-col">
+
+        <div class="current-card">
+          <div class="current-top">
+            <div>
+              <h1 id="cityName">— <button class="star-btn" id="starBtn" title="Save as favorite">☆</button></h1>
+              <p class="date" id="currentDate">—</p>
+            </div>
+            <div class="current-icon" id="currentIcon"></div>
+          </div>
+
+          <div class="current-temp">
+            <span id="currentTemp">--°</span>
+            <span class="feels" id="feelsLike">Feels like --°</span>
+          </div>
+          <p class="condition" id="condition">—</p>
+
+          <div class="daylight-bar">
+            <div class="daylight-track">
+              <div class="daylight-fill" id="daylightFill"></div>
+              <div class="daylight-marker" id="daylightMarker"></div>
+            </div>
+            <div class="daylight-labels">
+              <span id="sunrise">🌅 --:--</span>
+              <span id="sunset">🌇 --:--</span>
+            </div>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat"><span class="stat-label">Humidity</span><span class="stat-value" id="humidity">--%</span></div>
+            <div class="stat"><span class="stat-label">Wind</span><span class="stat-value" id="wind">-- km/h</span></div>
+            <div class="stat"><span class="stat-label">Pressure</span><span class="stat-value" id="pressure">-- hPa</span></div>
+            <div class="stat"><span class="stat-label">Visibility</span><span class="stat-value" id="visibility">-- km</span></div>
+            <div class="stat"><span class="stat-label">UV Index</span><span class="stat-value" id="uv">--</span></div>
+            <div class="stat aqi-stat"><span class="stat-label">Air Quality</span><span class="stat-value" id="aqi">--</span></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2 class="panel-title">Next 24 hours</h2>
+          <div class="hourly-scroll" id="hourlyScroll"></div>
+        </div>
+
+        <div class="panel">
+          <h2 class="panel-title">Temperature trend</h2>
+          <canvas id="trendChart" height="90"></canvas>
+        </div>
+
+        <div class="panel">
+          <h2 class="panel-title">5-day forecast</h2>
+          <div class="daily-list" id="dailyList"></div>
+        </div>
+
+      </section>
+
+      <!-- RIGHT: favorites + history -->
+      <aside class="side-col">
+        <div class="panel">
+          <h2 class="panel-title">Favorites</h2>
+          <div class="chip-list" id="favList"></div>
+          <p class="empty-hint" id="favEmptyHint">Star a city to pin it here.</p>
+        </div>
+
+        <div class="panel">
+          <h2 class="panel-title">Recent searches</h2>
+          <div class="chip-list" id="historyList"></div>
+          <p class="empty-hint" id="historyEmptyHint">Your searches will show up here.</p>
+        </div>
+      </aside>
+
+    </main>
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
